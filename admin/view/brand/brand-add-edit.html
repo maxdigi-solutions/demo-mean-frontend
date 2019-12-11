@@ -22,11 +22,13 @@
         </div>
         <div class="form-group">
             <label for="pwd">Brand Image</label>
-            <input type="file" ng-model="brandImg" class="form-control"  name="brandImg" id="brandImg" valid-file />
+            <input type="file" ng-model="brandImg" class="form-control"  name="brandImg" id="brandImg" valid-file file-model="myFile"/>
                     <div style="color:red"
-                        ng-if="brandForm.brandImg.$error.validFile && brandForm.$submitted">
+                        ng-if="(brandForm.brandImg.$error.validFile && brandForm.$submitted) || ((bFlag == 1) && brandForm.$submitted) ">
                     <span ng-show="brandForm.brandImg.$error.validFile">Image is required</span>
+                    <span ng-show=" (bFlag == 1)">{{msg}}</span>
                 </div>
+                
         </div>
         <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
