@@ -40,7 +40,9 @@
                                 <td>{{product.productPrice | currency:"Rs. "}}</td>
                                 <td>{{product.productSize}}</td>
                                 <td>{{product.productImg}}</td>
-                                <td><input type="checkbox" ng-model="product.selected" ng-change="setSelectedProduct(product)"/></td>
+                                <td><button type="button" class="btn btn-danger" ng-click="deletRecord(product.productID)">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button></td>
                         </tr>
                 </tbody>
         </table>

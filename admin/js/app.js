@@ -45,15 +45,42 @@ app.controller("productsController", function ($scope, $http) {
         isFeatured: 1
     }
 
-    $http({ url: "http://localhost:3000/getproducts", data: productParam, method: "POST" }).then(function (res) {
-        console.log(res);
-        if (res.status == 200) {
-            $scope.pdata = res.data.data;
-        }
-    })
+    var init = function () {
+        $http({ url: "http://localhost:3000/getproducts", data:productParam, method: "POST" }).then(function (res) {
+            console.log(res);
+            if (res.status == 200) {
+                $scope.pdata = res.data.data;
+            }
+        })
+    };
+    init();
+
     // $scope.rowLimit = 3;
 
-
+    $scope.deletRecord = function(id) {
+        if (confirm('Are you sure you want to delete this?')) {
+            console.log(productParam);
+            $http({ 
+                url: "http://localhost:3000/deleteproduct", 
+                data: {productID: id},
+                method: "POST",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                }
+             }).then(function (res) {
+                if (res.status == 200) {
+                    // $scope.pdata = res.data.data;
+                    alert('Deleted successfully');
+                }
+            }).then(function (){
+                init();
+            })
+        }
+    }
 
 })
 
