@@ -104,8 +104,7 @@ app.controller("brandsController", function ($scope, $http, fileUpload) {
             } else {
                 if (file.size > 5000) {
                     $scope.bFlag = 1
-                    $scope.msg = "please select valid type "
-                    alert("image size cannot greater than 5000")
+                    $scope.msg = "image size cannot greater than 5000"
                 } else {
                     var uploadUrl = "http://localhost:5000/submitData"
                     fileUpload.uploadFileToUrl(file, uploadUrl);
