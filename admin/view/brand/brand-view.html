@@ -1,0 +1,24 @@
+<div ng-controller="ViewBrandController">
+<div class="search-warp" >
+        Row to display:<input type="number" step="1" min="0" max="5" ng-model="rowLimit">
+    </div>
+    
+    <div class="tbl-data">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Brand Name</th>
+                <th>Brand Description</th>
+                <th>Brand Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="brand in pdata | limitTo:rowLimit">
+                <td>{{brand.brandName}}</td>
+                <td align="right">{{brand.brandDescription}}</td>
+                <td align="center">{{brand.brandImage}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

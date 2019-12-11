@@ -1,0 +1,46 @@
+<!-- <div ng-controller="productsController">
+    <div class="search-warp">
+        Row to display:<input type="number" step="1" min="0" max="5" ng-model="rowLimit">
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Product Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in pdata | limitTo:rowLimit">
+                <td>{{product.name}}</td>
+                <td align="right">{{product.price | currency:"Rs. "}}</td>
+                <td align="center">{{product.size}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+
+<div class="container" ng-controller="productsController">
+        <h2>Product List</h2>
+        <table class="table">
+                <thead>
+                        <tr>
+                                <th>Name</th>
+                                <th>Prise</th>
+                                <th>Size</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr ng-repeat="product in pdata">
+                                <td>{{product.productName}}</td>
+                                <td>{{product.productPrice | currency:"Rs. "}}</td>
+                                <td>{{product.productSize}}</td>
+                                <td>{{product.productImg}}</td>
+                                <td><input type="checkbox" ng-model="product.selected" ng-change="setSelectedProduct(product)"/></td>
+                        </tr>
+                </tbody>
+        </table>
+</div>

@@ -1,0 +1,58 @@
+<!-- <div ng-controller="brandsController">
+    <div class="frm-wrap">
+        <form name="brandForm" ng-submit="createBrand()">
+            <ul>
+                <li>
+                    <label>Brand Name</label>
+                    <input type="text" ng-model="brandName" name="brandName" id="brandName"  />
+                    <span  ng-show="(brandForm.brandName.$dirty || submitted) && brandForm.brandName.$error.required">Brand name is required.</span>
+                </li>
+                <li>
+                    <label>Brand Description</label>
+                    <input type="text" ng-model="brandDesc" id="brandDesc" />
+                </li>
+                <li>
+                    <label>Brand Image</label>
+                    <input type="file" ng-model="brandImg" id="brandImg" />
+                </li>
+                <li>
+                    <input type="submit">
+                </li>
+            </ul>
+        </form>
+    </div>
+</div> -->
+
+
+
+
+
+<div class="container" ng-controller="brandsController">
+        <a type="button" class="btn btn-success pull-right" href="#!/brands">Show All Brands</a>
+    <h2>Add Brand</h2>
+    
+    <form name="brandForm" ng-submit="createBrand()" novalidate="">
+        <div class="form-group">
+            <label for="brandName">Brand Name:</label>
+            <input type="text" class="form-control" ng-model="brandName" name="brandName" id="brandName"
+                placeholder="Enter Brand Name" required ng-maxlength='15'>
+            <div style="color:red" ng-if="brandForm.brandName.$invalid && (brandForm.$submitted || brandForm.brandName.$touched)">
+                <span ng-show="brandForm.brandName.$error.required">Please enter brand Name</span>
+                <span ng-show=brandForm.brandName.$error.maxlength>Brand name cannot be greater than 15 characters</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Brand Description</label>
+            <input type="text" class="form-control" ng-model="brandDesc" id="brandDesc"
+                placeholder="Enter Brand Description">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Brand Image</label>
+            <input type="file" class="form-control" ng-model="brandImg" id="brandImg" />
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <input type="submit" class="btn btn-default" value="Submit">
+    </form>
+</div>

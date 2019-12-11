@@ -1,0 +1,53 @@
+<!-- <div ng-controller="brandsController">
+    <div class="frm-wrap">
+        <form name="productForm" ng-submit="createBrand()">
+            <ul>
+                <li>
+                    <label>Brand Name</label>
+                    <input type="text" ng-model="brandName" name="brandName" id="brandName"  />
+                    <span  ng-show="(productForm.brandName.$dirty || submitted) && productForm.brandName.$error.required">Brand name is required.</span>
+                </li>
+                <li>
+                    <label>Brand Description</label>
+                    <input type="text" ng-model="brandDesc" id="brandDesc" />
+                </li>
+                <li>
+                    <label>Brand Image</label>
+                    <input type="file" ng-model="brandImg" id="brandImg" />
+                </li>
+                <li>
+                    <input type="submit">
+                </li>
+            </ul>
+        </form>
+    </div>
+</div> -->
+
+
+<div class="container" ng-controller="productController">
+        <a type="button" class="btn btn-success pull-right" href="#!/products">Show All Products</a>
+    <h2>Add Product</h2>
+    
+    <form name="productForm" ng-submit="createBrand()">
+        <div class="form-group">
+            <label for="productName">Product Name:</label>
+            <input type="text" class="form-control" ng-model="productName" name="productName" id="productName"
+                placeholder="Enter Product Name" ng-model="selectedProduct.productName">
+            <span ng-show="(productForm.productName.$dirty || submitted) && productForm.productName.$error.required">Brand name
+                is required.</span>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Brand Description</label>
+            <input type="text" class="form-control" ng-model="brandDesc" id="brandDesc"
+                placeholder="Enter Brand Description" ng-model="selectedProduct.fname">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Brand Image</label>
+            <input type="file" class="form-control" ng-model="brandImg" id="brandImg" />
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <input type="submit" class="btn btn-default" value="Submit">
+    </form>
+</div>
