@@ -14,6 +14,7 @@ app.config(function ($routeProvider) {
             controller: "productsController"
         }).when("/product-add-edit", {
             templateUrl: "view/product/product-add-edit.html",
+            controller: "addproductController"
         })
         .otherwise({
             templateUrl: "view/home/home.html",
@@ -43,7 +44,7 @@ app.controller("productsController", function ($scope, $http) {
     var productParam = {
         isFeatured: 1
     }
-
+    
     $http({ url: "http://localhost:3000/getproducts", data:productParam, method: "POST" }).then(function (res) {
         console.log(res);
         if (res.status == 200) {
@@ -53,48 +54,70 @@ app.controller("productsController", function ($scope, $http) {
     // $scope.rowLimit = 3;
     
     
-    $scope.setSelectedProduct = function (product) {
-        if ($scope.pdata.filter(x => x.selected).length > 1) {
-            $scope.selectedEmployee = null;
-            $scope.singleEmployeeSelected = false;
-        } else {
-            $scope.selectedEmployee = angular.copy($scope.pdata.find(x => x.selected));
-            $scope.singleEmployeeSelected = !!$scope.selectedEmployee;
-        }
+   
+})
+
+
+app.controller("addproductController", function ($scope, $http) {
+
+        $scope.createBrand = function () {
+            if ( $scope.productForm.$valid) {
+                // var brandData = {
+                //     brandName: $scope.brandName,
+                //     brandDesc: $scope.brandDesc,
+                // }
+                // console.log(brandData);
+                // $http({ url: "http://localhost:5000/submitData", data: brandData, method: "POST" }).then(function (res) {
+                //     console.log("---");
+                //     if (res.status == 200) {
+                //         $scope.pdata = res.data;
+                //     }
+                // })
+            }
+            
+     
     }
+    $scope.rowLimit = 3;
 })
 app.controller("brandsController", function ($scope, $http) {
-    $scope.brandName = "levis";
-    // $scope.pdata = pdata;
-
     $scope.createBrand = function () {
 
-        console.warn("--hi")
-        // $scope.lastName = "Doe";
-        // $scope.brandName = "Mahesh";
-        console.log($scope.brandName);
-        console.log($scope.brandDesc);
-        var brandData = {
-            brandName: $scope.brandName,
-            brandDesc: $scope.brandDesc,
-        }
-        // console.log(brandData);
-        $http({ url: "http://localhost:5000/submitData", data: brandData, method: "POST" }).then(function (res) {
-            console.log("---");
-            if (res.status == 200) {
-                $scope.pdata = res.data;
+       
+            if ( $scope.brandForm.$valid) {
+                var brandData = {
+                    brandName: $scope.brandName,
+                    brandDesc: $scope.brandDesc,
+                }
+                console.log(brandData);
+                $http({ url: "http://localhost:5000/submitData", data: brandData, method: "POST" }).then(function (res) {
+                    console.log("---");
+                    if (res.status == 200) {
+                        $scope.pdata = res.data;
+                    }
+                })
             }
-        })
-        // $http({
-        //     url: 'http://localhost:5000/submitData',
-        //     method: 'GET',
-        //     data: brandData
-        // }).then(function (httpResponse) {
-        //     console.log('response:', httpResponse);
-        // })
+            
+        
     }
     $scope.rowLimit = 3;
 })
 app.controller('brandNavController', function NavCtrl($location, $scope) {
 
 });
+
+app.directive('validFile',function(){
+    return {
+        require:'ngModel',
+        link:function(scope,el,attrs,ctrl){
+            ctrl.$setValidity('validFile', el.val() != '');
+            //change event is fired when file is selected
+            el.bind('change',function(){
+                ctrl.$setValidity('validFile', el.val() != '');
+                scope.$apply(function(){
+                    ctrl.$setViewValue(el.val());
+                    ctrl.$render();
+                });
+            });
+        }
+    }
+})

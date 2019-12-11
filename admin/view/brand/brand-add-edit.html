@@ -1,37 +1,8 @@
-<!-- <div ng-controller="brandsController">
-    <div class="frm-wrap">
-        <form name="brandForm" ng-submit="createBrand()">
-            <ul>
-                <li>
-                    <label>Brand Name</label>
-                    <input type="text" ng-model="brandName" name="brandName" id="brandName"  />
-                    <span  ng-show="(brandForm.brandName.$dirty || submitted) && brandForm.brandName.$error.required">Brand name is required.</span>
-                </li>
-                <li>
-                    <label>Brand Description</label>
-                    <input type="text" ng-model="brandDesc" id="brandDesc" />
-                </li>
-                <li>
-                    <label>Brand Image</label>
-                    <input type="file" ng-model="brandImg" id="brandImg" />
-                </li>
-                <li>
-                    <input type="submit">
-                </li>
-            </ul>
-        </form>
-    </div>
-</div> -->
-
-
-
-
-
 <div class="container" ng-controller="brandsController">
         <a type="button" class="btn btn-success pull-right" href="#!/brands">Show All Brands</a>
     <h2>Add Brand</h2>
     
-    <form name="brandForm" ng-submit="createBrand()" novalidate="">
+    <form name="brandForm" ng-submit="createBrand()" novalidate>
         <div class="form-group">
             <label for="brandName">Brand Name:</label>
             <input type="text" class="form-control" ng-model="brandName" name="brandName" id="brandName"
@@ -42,17 +13,24 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="pwd">Brand Description</label>
-            <input type="text" class="form-control" ng-model="brandDesc" id="brandDesc"
-                placeholder="Enter Brand Description">
+            <label for="brandDesc">Brand Description</label>
+            <input type="text" class="form-control" ng-model="brandDesc" name="brandDesc" id="brandDesc"
+                placeholder="Enter Brand Description" required >
+                <div style="color:red" ng-if="brandForm.brandDesc.$invalid && (brandForm.$submitted || brandForm.brandDesc.$touched)">
+                    <span ng-show="brandForm.brandDesc.$error.required">Please enter brand description</span>
+                </div>
         </div>
         <div class="form-group">
             <label for="pwd">Brand Image</label>
-            <input type="file" class="form-control" ng-model="brandImg" id="brandImg" />
+            <input type="file" ng-model="brandImg" class="form-control"  name="brandImg" id="brandImg" valid-file />
+                    <div style="color:red"
+                        ng-if="brandForm.brandImg.$error.validFile && brandForm.$submitted">
+                    <span ng-show="brandForm.brandImg.$error.validFile">Image is required</span>
+                </div>
         </div>
         <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
         </div>
-        <input type="submit" class="btn btn-default" value="Submit">
+        <button type="submit">Save</button>
     </form>
 </div>

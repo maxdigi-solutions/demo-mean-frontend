@@ -40,34 +40,21 @@ app.controller("productsController", function ($scope, $http) {
     }
 })
 app.controller("brandsController", function ($scope, $http) {
-    $scope.brandName = "levis";
-    // $scope.pdata = pdata;
-
     $scope.createBrand = function () {
-
-        console.warn("--hi")
-        // $scope.lastName = "Doe";
-        // $scope.brandName = "Mahesh";
-        console.log($scope.brandName);
-        console.log($scope.brandDesc);
-        var brandData = {
-            brandName: $scope.brandName,
-            brandDesc: $scope.brandDesc,
-        }
-        // console.log(brandData);
-        $http({ url: "http://localhost:5000/submitData", data: brandData, method: "POST" }).then(function (res) {
-            console.log("---");
-            if (res.status == 200) {
-                $scope.pdata = res.data;
+        if ( $scope.brandForm.$valid) {
+            var brandData = {
+                brandName: $scope.brandName,
+                brandDesc: $scope.brandDesc,
             }
-        })
-        // $http({
-        //     url: 'http://localhost:5000/submitData',
-        //     method: 'GET',
-        //     data: brandData
-        // }).then(function (httpResponse) {
-        //     console.log('response:', httpResponse);
-        // })
+            console.log(brandData);
+            $http({ url: "http://localhost:5000/submitData", data: brandData, method: "POST" }).then(function (res) {
+                console.log("---");
+                if (res.status == 200) {
+                    $scope.pdata = res.data;
+                }
+            })
+        }
+        
     }
     $scope.rowLimit = 3;
 })

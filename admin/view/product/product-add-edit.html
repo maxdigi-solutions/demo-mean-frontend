@@ -24,26 +24,36 @@
 </div> -->
 
 
-<div class="container" ng-controller="productController">
+<div class="container" ng-controller="addproductController">
         <a type="button" class="btn btn-success pull-right" href="#!/products">Show All Products</a>
     <h2>Add Product</h2>
     
-    <form name="productForm" ng-submit="createBrand()">
+    <form name="productForm" ng-submit="createProduct()" novalidate>
         <div class="form-group">
             <label for="productName">Product Name:</label>
             <input type="text" class="form-control" ng-model="productName" name="productName" id="productName"
-                placeholder="Enter Product Name" ng-model="selectedProduct.productName">
-            <span ng-show="(productForm.productName.$dirty || submitted) && productForm.productName.$error.required">Brand name
-                is required.</span>
+                placeholder="Enter Product Name" ng-model="selectedProduct.productName" required ng-maxlength="15">
+                <div style="color:red" ng-if="productForm.productName.$invalid && (productForm.$submitted || productForm.productName.$touched)">
+                    <span ng-show="productForm.productName.$error.required">Please enter product Name</span>
+                    <span ng-show=productForm.productName.$error.maxlength>Product name cannot be greater than 15 characters</span>
+                </div>
+                
         </div>
         <div class="form-group">
-            <label for="pwd">Brand Description</label>
-            <input type="text" class="form-control" ng-model="brandDesc" id="brandDesc"
-                placeholder="Enter Brand Description" ng-model="selectedProduct.fname">
+            <label for="pwd">Product Description</label>
+            <input type="text" class="form-control" ng-model="productDesc" name="productDesc"
+                placeholder="Enter Product Description" ng-model="selectedProduct.fname" required>
+                <div style="color:red" ng-if="productForm.productDesc.$invalid && (productForm.$submitted || productForm.productDesc.$touched)">
+                    <span ng-show="productForm.productDesc.$error.required">Please enter product Name</span>
+                </div>
         </div>
         <div class="form-group">
-            <label for="pwd">Brand Image</label>
-            <input type="file" class="form-control" ng-model="brandImg" id="brandImg" />
+            <label for="pwd">Product Image</label>
+            <input type="file" ng-model="productImg" class="form-control"  name="productImg" id="productImg" valid-file />
+                    <div style="color:red"
+                        ng-if="productForm.productImg.$error.validFile && productForm.$submitted">
+                    <span ng-show="productForm.productImg.$error.validFile">Image is required</span>
+                </div>
         </div>
         <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
